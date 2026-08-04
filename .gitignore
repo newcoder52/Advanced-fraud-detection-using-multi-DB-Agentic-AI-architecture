@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.vite/
+backend/lambda_package/
+backend/lambda.zip
+backend/.venv/
+.DS_Store
+*.pyc
+__pycache__/
+.env
+cdk.out/
