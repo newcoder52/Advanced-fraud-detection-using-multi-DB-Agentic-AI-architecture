@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Local DynamoDB
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    ports:
+      - "8001:8000"
+    command: -jar DynamoDBLocal.jar -sharedDb -inMemory
+
+  # PostgreSQL with pgvector (simulates Aurora)
+  postgres:
+    image: pgvector/pgvector:pg16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: multidb_poc
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # Redis (simulates ElastiCache Valkey)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:
